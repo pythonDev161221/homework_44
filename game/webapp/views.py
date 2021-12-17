@@ -69,6 +69,7 @@ def index_view(request):
         context = {
             'answer': ans,
             'secret_nums': secret_nums,
+            'client_nums': n
 
         }
     return render(request, "index.html", context)
