@@ -7,9 +7,10 @@ def index_view(request):
         return render(request, 'index.html')
     elif request.method == 'POST':
         context = {}
-        numbers = request.POST.get('numbers')
-        print(numbers)
-        print(numbers)
-        print(numbers)
-
+        numbers = request.POST.get('num')
+        numbers = numbers.split(" ")
+        l = []
+        for i in numbers:
+            l.append(int(i))
+        print(l)
     return render(request, 'index.html')
