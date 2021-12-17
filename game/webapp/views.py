@@ -16,17 +16,14 @@ def index_view(request):
         }
         return render(request, 'index.html', context)
     elif request.method == 'POST':
-
         numbers = request.POST.get('num').strip()
-
         numbers = numbers.split(" ")
-
         num_list = []
         try:
             for i in numbers:
                 if i:
                     num_list.append(int(i))
-        except:
+        except ValueError:
             context['answer'] = 'it is need to input only numbers'
             return render(request, 'index.html', context)
 
