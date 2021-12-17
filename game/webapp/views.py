@@ -18,10 +18,8 @@ def index_view(request):
         for i in numbers:
             l.append(int(i))
         # print(l)
-        for i in range(len(l)):
-            context[i] = l[i]
-        print(context)
+
         context = {
-            'answer': 'I am working about it'
+            'answer': l
         }
     return render(request, "index.html", context)
