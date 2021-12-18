@@ -17,15 +17,16 @@ def num_list_create(n):
 
 def index_view(request):
 
-    global secret_nums, context, N
+    global secret_nums, context, N, nums_history
 
     if request.method == "GET":
+        nums_history = []
         N = 4
         secret_nums = []
         secret_nums = num_list_create(N)
 
         context = {
-            'answer': 'fill input and there will be a result',
+            'answer': 'Заполните пустую строку и ответ будет здесь',
             'secret_nums': secret_nums,
         }
         return render(request, 'index.html', context)
@@ -38,20 +39,21 @@ def index_view(request):
                 if i:
                     num_list.append(int(i))
         except ValueError:
-            context['answer'] = 'it is need to input only numbers'
+            context['answer'] = 'нужно вводить только числа'
             return render(request, 'index.html', context)
         n = num_list
 
         if len(n) != N:
-            context['answer'] = f'it should be {N} numbers'
+            context['answer'] = f'Должно быть {N} числа'
             return render(request, 'index.html', context)
         for i in n:
             if i > 9 or i < 1:
-                context['answer'] = 'value should be between 1 and 9 included'
+                context['answer'] = 'значение доолжно быть от 1 до 9-ти'
                 return render(request, 'index.html', context)
             elif n.count(i) > 1:
-                context['answer'] = 'any number should not repeated twice or more'
+                context['answer'] = 'числа не должны повторяться'
                 return render(request, 'index.html', context)
+
         b = 0
         c = 0
         for i in n:
@@ -64,12 +66,20 @@ def index_view(request):
         if b == N:
             ans = 'Congratulation. You win!!!'
         else:
-            ans = f'bulls is: {b}; and cows is: {c}'
-
+            ans = f'количество Быков: {b}; и количество Коров: {c}'
+        nums_history.append(ans)
         context = {
             'answer': ans,
             'secret_nums': secret_nums,
-            'client_nums': n
-
+            'client_nums': n,
         }
     return render(request, "index.html", context)
+
+
+def nums_history_view(request):
+    context_nums = {}
+    dict_nums = {}
+    for i in range(len(nums_history)):
+        dict_nums[i+1] = nums_history[i]
+    context_nums['nums'] = dict_nums
+    return render(request, 'history.html', context_nums)

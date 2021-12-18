@@ -7,17 +7,18 @@
 <body>
 <form action="" method="post">
     {% csrf_token %}
-    <h3>Add 4 numbers with space between</h3>
+    <h3>Введите 4 числа с пробелом между ними</h3>
     <p>
-        <input id="numbers" type="text" name="num">
+        <input id="numbers" type="text" name="num"><input type="submit" value="Ввести">
     </p>
-    <input type="submit" value="OK">
+
 </form>
 
     <p>
-        <div>your numbers: {{ client_nums }}</div>
-        <div>Result: {{ answer }}</div>
+        <div>Введенное число: {{ client_nums }}</div>
+        <div>Результат: {{ answer }}</div>
     </p>
+<a href="history/">История ходов</a>
 
 </body>
 </html>
