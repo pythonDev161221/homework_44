@@ -53,7 +53,7 @@ def index_view(request):
             elif n.count(i) > 1:
                 context['answer'] = 'any number should not repeated twice or more'
                 return render(request, 'index.html', context)
-        nums_history.append(n)
+
         b = 0
         c = 0
         for i in n:
@@ -67,12 +67,11 @@ def index_view(request):
             ans = 'Congratulation. You win!!!'
         else:
             ans = f'bulls is: {b}; and cows is: {c}'
-
+        nums_history.append(ans)
         context = {
             'answer': ans,
             'secret_nums': secret_nums,
             'client_nums': n,
-            'nums_history': nums_history,
         }
     return render(request, "index.html", context)
 
@@ -80,6 +79,11 @@ def index_view(request):
 def nums_history_view(request):
     context_nums = {}
     # for i in nums_history:
-        # context_nums[f'num{nums_history.index(i)}'] = i
-    context_nums['nums'] = nums_history
+    #     context_nums[f'{nums_history.index(i)}'] = i
+    dict_nums = {}
+    # for i in nums_history:
+    #     dict_nums[nums_history.index(i)] = i
+    for i in range(len(nums_history)):
+        dict_nums[i+1] = nums_history[i]
+    context_nums['nums'] = dict_nums
     return render(request, 'history.html', context_nums)

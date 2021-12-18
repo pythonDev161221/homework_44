@@ -6,9 +6,9 @@
 </head>
 <body>
 your numbers below:<br>
-{% for i in nums %}
+{% for i, j in nums.items %}
     <div>
-    {{ i }}
+    {{ i }}: {{ j }}
     </div>
 {% endfor %}
 
