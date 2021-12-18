@@ -5,10 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-your numbers below:<br>
+<h2>
+    История ходов
+</h2>
+
 {% for i, j in nums.items %}
     <div>
-    {{ i }}: {{ j }}
+    ход {{ i }}: {{ j }}
     </div>
 {% endfor %}
 
