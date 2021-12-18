@@ -73,13 +73,13 @@ def index_view(request):
             'secret_nums': secret_nums,
             'client_nums': n,
             'nums_history': nums_history,
-
         }
     return render(request, "index.html", context)
 
 
 def nums_history_view(request):
-    # context_nums = {}
-    # for i in nums_his:
-    #     context_nums[nums_his.index(i)] = i
-    return render(request, 'history.html')
+    context_nums = {}
+    # for i in nums_history:
+        # context_nums[f'num{nums_history.index(i)}'] = i
+    context_nums['nums'] = nums_history
+    return render(request, 'history.html', context_nums)
