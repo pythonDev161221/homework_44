@@ -17,9 +17,10 @@ def num_list_create(n):
 
 def index_view(request):
 
-    global secret_nums, context, N
+    global secret_nums, context, N, nums_history
 
     if request.method == "GET":
+        nums_history = []
         N = 4
         secret_nums = []
         secret_nums = num_list_create(N)
@@ -52,6 +53,7 @@ def index_view(request):
             elif n.count(i) > 1:
                 context['answer'] = 'any number should not repeated twice or more'
                 return render(request, 'index.html', context)
+        nums_history.append(n)
         b = 0
         c = 0
         for i in n:
@@ -69,7 +71,15 @@ def index_view(request):
         context = {
             'answer': ans,
             'secret_nums': secret_nums,
-            'client_nums': n
+            'client_nums': n,
+            'nums_history': nums_history,
 
         }
     return render(request, "index.html", context)
+
+
+def nums_history_view(request):
+    # context_nums = {}
+    # for i in nums_his:
+    #     context_nums[nums_his.index(i)] = i
+    return render(request, 'history.html')
